@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Asymptote Labs | Where Innovation Approaches Infinity</title>
+		<!-- Tailwind CSS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+		<!-- Fonts -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			/* Retro Styles */
+			body {
+				font-family: "VT323", monospace;
+				background-color: #000080; /* Classic blue */
+				color: #00ff00; /* Green text */
+				background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+			}
+
+			.retro-container {
+				border: 4px solid #c0c0c0;
+				padding-left: 15px;
+				box-shadow: inset -4px -4px 0px 0px #808080,
+					inset 4px 4px 0px 0px #ffffff;
+			}
+
+			.retro-header {
+				font-family: "Press Start 2P", cursive;
+				background: linear-gradient(to right, #000099, #000055);
+				color: #ffffff;
+				text-shadow: 2px 2px 0px #ff00ff;
+				padding: 10px;
+				border-bottom: 4px solid #c0c0c0;
+				box-shadow: 0px 4px 0px 0px #808080;
+			}
+
+			.retro-btn {
+				background-color: #c0c0c0;
+				color: #000000;
+				border: 2px solid #000000;
+				box-shadow: inset -2px -2px 0px 0px #808080,
+					inset 2px 2px 0px 0px #ffffff;
+				font-family: "VT323", monospace;
+				font-size: 1.2rem;
+				padding: 5px 15px;
+				cursor: pointer;
+				transition: all 0.1s;
+			}
+
+			.retro-btn:hover {
+				background-color: #dddddd;
+			}
+
+			.retro-btn:active {
+				box-shadow: inset 2px 2px 0px 0px #808080,
+					inset -2px -2px 0px 0px #ffffff;
+			}
+
+			.pixel-divider {
+				height: 6px;
+				background: linear-gradient(to right, #ff00ff, #00ffff, #ff00ff);
+				margin: 20px 0;
+			}
+
+			.blink {
+				animation: blink 1s step-end infinite;
+			}
+
+			@keyframes blink {
+				50% {
+					opacity: 0;
+				}
+			}
+
+			.menu-item {
+				display: inline-block;
+				margin: 0 10px;
+				background-color: #000080;
+				color: #ffffff;
+				padding: 5px 15px;
+				border: 2px solid #c0c0c0;
+				box-shadow: inset -2px -2px 0px 0px #808080,
+					inset 2px 2px 0px 0px #ffffff;
+				cursor: pointer;
+			}
+
+			.menu-item:hover {
+				background-color: #0000ff;
+			}
+
+			.menu-item.active {
+				background-color: #0000ff;
+				box-shadow: inset 2px 2px 0px 0px #808080,
+					inset -2px -2px 0px 0px #ffffff;
+			}
+
+			.section {
+				display: none;
+			}
+
+			.section.active {
+				display: block;
+			}
+
+			.project-card {
+				border: 2px solid #c0c0c0;
+				background-color: #000055;
+				padding: 15px;
+				margin-bottom: 20px;
+				box-shadow: inset -4px -4px 0px 0px #000033,
+					inset 4px 4px 0px 0px #0000aa;
+			}
+
+			.footer {
+				background-color: #000044;
+				border-top: 2px solid #c0c0c0;
+				color: #aaaaaa;
+				padding: 20px;
+				margin-top: 40px;
+			}
+
+			/* Form elements */
+			input,
+			textarea {
+				background-color: #000033;
+				border: 2px solid #c0c0c0;
+				color: #00ff00;
+				font-family: "VT323", monospace;
+				padding: 8px;
+				font-size: 18px;
+				margin-bottom: 10px;
+				width: 100%;
+			}
+
+			input:focus,
+			textarea:focus {
+				outline: none;
+				border-color: #00ffff;
+				box-shadow: 0 0 5px #00ffff;
+			}
+
+			/* Loader effect */
+			.scanlines {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(
+					to bottom,
+					rgba(255, 255, 255, 0) 50%,
+					rgba(0, 0, 0, 0.2) 50%
+				);
+				background-size: 100% 4px;
+				pointer-events: none;
+				z-index: 100;
+				opacity: 0.1;
+			}
+
+			/* Marquee */
+			.marquee {
+				background-color: #000000;
+				color: #ffff00;
+				white-space: nowrap;
+				overflow: hidden;
+				box-sizing: border-box;
+				border: 2px solid #c0c0c0;
+			}
+
+			.marquee span {
+				display: inline-block;
+				padding-left: 100%;
+				animation: marquee 20s linear infinite;
+			}
+
+			@keyframes marquee {
+				0% {
+					transform: translate(0, 0);
+				}
+				100% {
+					transform: translate(-100%, 0);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Scanlines effect -->
+		<div class="scanlines"></div>
+
+		<!-- Header -->
+		<header class="retro-header p-4">
+			<div
+				class="container mx-auto flex flex-col md:flex-row justify-between items-center"
+			>
+				<h1 class="text-2xl md:text-4xl mb-4 md:mb-0">
+					ASYMPTOTE LABS <span class="blink">_</span>
+				</h1>
+				<nav class="text-center md:text-right">
+					<div class="menu-item active" data-section="home">Home</div>
+					<div class="menu-item" data-section="about">About</div>
+					<div class="menu-item" data-section="projects">Projects</div>
+					<div class="menu-item" data-section="services">Services</div>
+					<div class="menu-item" data-section="research">Research</div>
+					<div class="menu-item" data-section="careers">Careers</div>
+					<div class="menu-item" data-section="policies">Policies</div>
+					<div class="menu-item" data-section="contact">Contact</div>
+				</nav>
+			</div>
+		</header>
+
+		<!-- Marquee -->
+		<div class="marquee py-1">
+			<span
+				>*** ASYMPTOTE LABS: WHERE INNOVATION APPROACHES INFINITY *** EXPLORING
+				THE EDGES OF POSSIBILITY IN AI, SOFTWARE, AND HUMAN-CENTERED DESIGN ***
+				FOUNDED IN 2025 ***</span
+			>
+		</div>
+
+		<!-- Main Content -->
+		<main class="container mx-auto px-4 py-8">
+			<!-- Home Section -->
+			<section id="home" class="section active">
+				<div class="retro-container bg-gray-900 p-6 mb-8">
+					<h2 class="text-4xl mb-4 text-center text-yellow-300">
+						WHERE INNOVATION APPROACHES INFINITY
+					</h2>
+					<p class="text-xl mb-6 text-center">
+						Exploring the edges of possibility in AI, software, and
+						human-centered design.
+					</p>
+					<div class="flex justify-center space-x-4 mb-8">
+						<button class="retro-btn" onclick="switchSection('projects')">
+							EXPLORE PROJECTS
+						</button>
+						<button class="retro-btn" onclick="switchSection('careers')">
+							JOIN US
+						</button>
+					</div>
+
+					<div class="pixel-divider"></div>
+
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+						<div class="text-center">
+							<h3 class="text-2xl mb-2 text-cyan-400">🚀 SCALABLE STARTUP</h3>
+							<p>From Dhaka, Bangladesh</p>
+						</div>
+						<div class="text-center">
+							<h3 class="text-2xl mb-2 text-cyan-400">🧠 INNOVATION FOCUS</h3>
+							<p>AI, Software, Research & Product</p>
+						</div>
+						<div class="text-center">
+							<h3 class="text-2xl mb-2 text-cyan-400">🌍 COMMUNITY CENTERED</h3>
+							<p>Tech, Innovation & Learning</p>
+						</div>
+					</div>
+
+					<div class="pixel-divider"></div>
+
+					<h3 class="text-2xl mb-4 text-center text-yellow-300">
+						FEATURED PROJECTS
+					</h3>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+						<div class="project-card">
+							<h4 class="text-xl mb-2 text-cyan-400">The Density Decoder</h4>
+							<p>
+								Unlocking the profound mysteries of your weight and height by
+								calculating the BMI
+							</p>
+						</div>
+						<div class="project-card">
+							<h4 class="text-xl mb-2 text-cyan-400">
+								The Academic Ego Inflator/Deflator
+							</h4>
+							<p>
+								Calculate CGPA and prepare for either fleeting pride or crushing
+								disappointment.
+							</p>
+						</div>
+					</div>
+					<div class="text-center">
+						<button class="retro-btn" onclick="switchSection('projects')">
+							VIEW ALL PROJECTS
+						</button>
+					</div>
+
+					<div class="pixel-divider"></div>
+
+					<div class="bg-gray-800 p-4 retro-container">
+						<blockquote class="text-xl italic text-center text-yellow-300">
+							"Amra kokhonoi lokkhe pouchabo na, chuye dite mon chaileo jabe na
+							je chuya..."
+							<footer class="text-right mt-2">— Mahbub Kousar</footer>
+						</blockquote>
+						<blockquote class="text-xl italic text-center text-yellow-300">
+							"Ekhane sami bhai kichu bolben..."
+							<footer class="text-right mt-2">— Mannan Sami</footer>
+						</blockquote>
+					</div>
+				</div>
+			</section>
+
+			<!-- About Section -->
+			<section id="about" class="section">
+				<div class="retro-container bg-gray-900 p-6 mb-8">
+					<h2 class="text-4xl mb-6 text-center text-yellow-300">ABOUT US</h2>
+
+					<div class="mb-8">
+						<h3 class="text-2xl mb-2 text-cyan-400">MISSION</h3>
+						<p class="text-xl">
+							To explore, build, and scale ethical and intelligent technology
+							that serves people, not systems.
+						</p>
+					</div>
+
+					<div class="mb-8">
+						<h3 class="text-2xl mb-2 text-cyan-400">VISION</h3>
+						<p class="text-xl">
+							To become a global innovation lab for powerful, simple, and
+							accessible tech solutions that matter.
+						</p>
+					</div>
+
+					<div class="pixel-divider"></div>
+
+					<div class="mb-8">
+						<h3 class="text-2xl mb-2 text-cyan-400">OUR STORY</h3>
+						<p class="mb-4">
+							Founded in 2025 by Mahbub Kousar and Mannan Sami, Asymptote Labs
+							is an initiative to research, prototype, and ship groundbreaking
+							tools in AI, software, and community empowerment.
+						</p>
+						<p>
+							Like an asymptote in mathematics that approaches but never reaches
+							a limit, we believe innovation is an endless journey of getting
+							closer to perfection without ever claiming to have reached it.
+						</p>
+					</div>
+
+					<div class="pixel-divider"></div>
+
+					<div class="bg-gray-800 p-4 retro-container">
+						<h3 class="text-2xl mb-4 text-center text-yellow-300">
+							WHY "ASYMPTOTE"?
+						</h3>
+						<p class="mb-2">
+							In mathematics, an asymptote is a line that a curve approaches but
+							never quite reaches.
+						</p>
+						<p>
+							Similarly, our work approaches the ideals of perfect technology
+							without claiming to have reached them. We believe in constant
+							improvement, iteration, and learning.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Projects Section -->
+			<section id="projects" class="section">
+				<div class="retro-container bg-gray-900 p-6 mb-8">
+					<h2 class="text-4xl mb-6 text-center text-yellow-300">PROJECTS</h2>
+
+					<div class="project-card p-6 mb-8">
+						<h3 class="text-2xl mb-2 text-cyan-400">🔹 The Density Decoder</h3>
+						<p class="mb-4">
+							Unlocking the profound mysteries of your weight and height by
+							calculating the BMI
+						</p>
+						<p class="mb-2">
+							<strong>Tech Stack:</strong> HTML, CSS, JavaScript, React (Web),
+							Kotlin, Jetpack Compose (Android), Swift, SwiftUI (iOS, macOS), C#
+							(.NET MAUI - Windows, macOS), C# (WinUI 3 - Windows)
+						</p>
+						<p>
+							<strong>Status:</strong>
+							<span class="blink text-yellow-300">IN DEVELOPMENT</span>
+						</p>
+					</div>
+
+					<div class="project-card p-6 mb-8">
+						<h3 class="text-2xl mb-2 text-cyan-400">
+							🔹 The Academic Ego Inflator/Deflatorw
+						</h3>
+						<p class="mb-4">
+							Calculate CGPA and prepare for either fleeting pride or crushing
+							disappointment.
+						</p>
+						<p class="mb-2">
+							<strong>Tech Stack:</strong> HTML, CSS, JavaScript, Vue.js (Web),
+							Kotlin, Jetpack Compose (Android), Swift, UIKit (iOS), Python
+							(Tkinter - Windows, macOS), C# (.NET MAUI - Windows, macOS)
+						</p>
+						<p>
+							<strong>Status:</strong> <span class="text-green-400">BETA</span>
+						</p>
+					</div>
+
+					<div class="text-center">
+						<button class="retro-btn project-demo">REQUEST PROJECT DEMO</button>
+						<p id="project-warning" class="warning-text" style="color: red">
+							Don't request, kori nai ekhono
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Services Section -->
+			<section id="services" class="section">
+				<div class="retro-container bg-gray-900 p-6 mb-8">
+					<h2 class="text-4xl mb-6 text-center text-yellow-300">SERVICES</h2>
+
+					<div class="mb-8">
+						<h3 class="text-2xl mb-4 text-cyan-400">
+							CURRENTLY AVAILABLE SERVICES:
+						</h3>
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+							<div class="project-card">
+								<h4 class="text-xl mb-2">Takar binimoye assignment</h4>
+								<p>
+									Taka dile CSE er assignment kore dibo. onek taka dile BBA er
+									tao kore dibo. Law allowed na.
+								</p>
+							</div>
+							<div class="project-card">
+								<h4 class="text-xl mb-2">Phishing link diye FB hacking</h4>
+								<p>
+									Apnar GF/BF bekkol hole, amra phishing site diye luv dekhaye
+									tar facebook id hack kore dibo.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="pixel-divider"></div>
+
+					<div class="bg-gray-800 p-6 retro-container">
+						<h3 class="text-2xl mb-4 text-center text-yellow-300">
+							SERVICE APPROACH
+						</h3>
+						<p class="mb-4">
+							At Asymptote Labs, we believe in collaboration over mere service
+							provision. We work with you as partners to understand your
+							problems deeply before proposing solutions.
+						</p>
+						<div class="text-center mt-6">
+							<button class="retro-btn" onclick="switchSection('contact')">
+								REQUEST CONSULTATION
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Research Section -->
+			<section id="research" class="section">
+				<div class="retro-container bg-gray-900 p-6 mb-8">
+					<h2 class="text-4xl mb-6 text-center text-yellow-300">
+						RESEARCH & INNOVATION
+					</h2>
+
+					<div class="mb-8">
+						<h3 class="text-2xl mb-4 text-cyan-400">ONGOING INITIATIVES:</h3>
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+							<div class="project-card">
+								<h4 class="text-xl mb-2">Easy Esacpe form NbM</h4>
+								<p>
+									We are currently conducting an intensive research on escaping from nbm to be a jinish. 
+								</p>
+						</div>
+					</div>
+
+					<div class="pixel-divider"></div>
+
+					<div class="bg-gray-800 p-6 retro-container">
+						<h3 class="text-2xl mb-4 text-center text-yellow-300">
+							COLLABORATION OPPORTUNITIES
+						</h3>
+						<p class="mb-4">
+							We believe in open research and are always looking for
+							collaborators. If you're working in similar areas or have
+							complementary expertise, let's connect!
+						</p>
+						<div class="text-center mt-6">
+							<button class="retro-btn" onclick="switchSection('contact')">
+								REACH OUT
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Careers Section -->
+			<section id="careers" class="section">
+				<div class="retro-container bg-gray-900 p-6 mb-8">
+					<h2 class="text-4xl mb-6 text-center text-yellow-300">CAREERS</h2>
+
+					<div class="mb-8">
+						<h3 class="text-2xl mb-4 text-center text-cyan-400">
+							JOIN THE JOURNEY OF INNOVATION
+						</h3>
+
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+							<div class="text-center">
+								<h4 class="text-xl mb-2">Experimental Culture</h4>
+								<p>Freedom to explore and test new ideas.</p>
+							</div>
+							<div class="text-center">
+								<h4 class="text-xl mb-2">Work with Founder</h4>
+								<p>Direct collaboration and mentorship.</p>
+							</div>
+							<div class="text-center">
+								<h4 class="text-xl mb-2">Flexible Roles</h4>
+								<p>Opportunities in tech, content, and design.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="pixel-divider"></div>
+
+					<div class="mb-8">
+						<h3 class="text-2xl mb-4 text-cyan-400">OPEN ROLES:</h3>
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+							<div class="project-card">
+								<h4 class="text-xl mb-2">Project Labour (Remote)</h4>
+								<p class="mb-2">
+									Do CSE465 and CSE327 projects for nothing in return.
+								</p>
+								<button class="retro-btn project-demo1">APPLY</button>
+						<p id="project-warning1" class="warning-text" style="color: red">
+							apni parben na, apply koiren na
+						</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Policies Section -->
+			<section id="policies" class="section">
+				<div class="retro-container bg-gray-900 p-6 mb-8">
+					<h2 class="text-4xl mb-6 text-center text-yellow-300">
+						POLICIES & GOVERNANCE
+					</h2>
+
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+						<div class="project-card">
+							<h4 class="text-xl mb-2">Terms & Conditions</h4>
+							<p>Guidelines for using our services and products.</p>
+							<a href="https://docs.google.com/document/d/1qLqMPIPrpnjPHE9xjppOFZ3oHidAHVNaRTqtt6Y_-F4/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><button class="retro-btn mt-2">READ</button></a>
+						</div>
+						<div class="project-card">
+							<h4 class="text-xl mb-2">Privacy & Data Policy</h4>
+							<p>How we handle and protect your information.</p>
+							<a href="https://docs.google.com/document/d/1_6I3FKzMA_IKBy1xyt9BDDWn1aOo9E1iAkN663_gCX8/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><button class="retro-btn mt-2">READ</button></a>
+						</div>
+						<div class="project-card">
+							<h4 class="text-xl mb-2">Code of Conduct</h4>
+							<p>Standards for behavior within our community.</p>
+							<a href="https://docs.google.com/document/d/15u8pVnR2YHwQ9oLn47OmxwLGnQSuDwOaoRMDCu7NFD8/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><button class="retro-btn mt-2">READ</button></a>
+						</div>
+						<div class="project-card">
+							<h4 class="text-xl mb-2">NDA & IP Policy</h4>
+							<p>
+								Protection of intellectual property and confidential
+								information.
+							</p>
+							<a href="https://docs.google.com/document/d/1zBThg27UzudkbmORgJXof8afEdhsaJfnBtSwL8TkJLY/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><button class="retro-btn mt-2">READ</button></a>
+						</div>
+						<div class="project-card">
+							<h4 class="text-xl mb-2">HR Policy</h4>
+							<p>How we work with our team and collaborators.</p>
+							<a href="https://docs.google.com/document/d/1vXKeZPc8r0yddU5VeX5DQ5GBy_VKX53KtMpZSlnJVeI/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><button class="retro-btn mt-2">READ</button></a>
+						</div>
+						
+					</div>
+
+					<div class="pixel-divider"></div>
+
+					<div class="bg-gray-800 p-6 retro-container">
+						<h3 class="text-2xl mb-4 text-center text-yellow-300">
+							OUR COMMITMENT
+						</h3>
+						<p class="mb-4 text-center">
+							Asymptote Labs believes that ethical governance is the foundation
+							of sustainable innovation. Our policies reflect our values of
+							transparency, responsibility, and human-centered design.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Contact Section -->
+			<section id="contact" class="section">
+				<div class="retro-container bg-gray-900 p-6 mb-8">
+					<h2 class="text-4xl mb-6 text-center text-yellow-300">CONTACT US</h2>
+
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+						<div>
+							<h3 class="text-2xl mb-4 text-cyan-400">GET IN TOUCH</h3>
+							<p class="mb-4">
+								<strong>📍 Head Office (Coming Soon):</strong> Dhaka, Bangladesh
+							</p>
+							<p class="mb-4">
+								<strong>📧 Email:</strong> asymptotelabs@gmail.com
+							</p>
+							<p class="mb-4"><strong>📞 Phone:</strong> +880-1608-908002</p>
+
+							<h4 class="text-xl mb-2 mt-6">FIND US ONLINE</h4>
+							<div class="flex space-x-4">
+								<button class="retro-btn">LinkedIn</button>
+								<button class="retro-btn">GitHub</button>
+								<button class="retro-btn">X</button>
+								<button class="retro-btn">YouTube</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="container mx-auto">
+				<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+					<div>
+						<h3 class="text-xl mb-4 text-cyan-400">Asymptote Labs</h3>
+						<p>Where Innovation Approaches Infinity</p>
+					</div>
+					<div>
+						<h3 class="text-xl mb-4 text-cyan-400">Quick Links</h3>
+						<ul>
+							<li class="mb-2">
+								<a href="#" onclick="switchSection('home')">Home</a>
+							</li>
+							<li class="mb-2">
+								<a href="#" onclick="switchSection('about')">About Us</a>
+							</li>
+							<li class="mb-2">
+								<a href="#" onclick="switchSection('projects')">Projects</a>
+							</li>
+							<li class="mb-2">
+								<a href="#" onclick="switchSection('contact')">Contact</a>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="text-xl mb-4 text-cyan-400">Legal</h3>
+						<ul>
+							<li class="mb-2">
+								<a href="#" onclick="switchSection('policies')"
+									>Privacy Policy</a
+								>
+							</li>
+							<li class="mb-2">
+								<a href="#" onclick="switchSection('policies')"
+									>Terms of Service</a
+								>
+							</li>
+							<li class="mb-2">
+								<a href="#" onclick="switchSection('policies')"
+									>Code of Conduct</a
+								>
+							</li>
+							<li class="mb-2">
+								<a href="#" onclick="switchSection('policies')">IP Policy</a>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="text-xl mb-4 text-cyan-400">Connect</h3>
+						<ul>
+							<li class="mb-2">asymptotelabs@gmail.com</li>
+							<li class="mb-2">Dhaka, Bangladesh</li>
+							<li class="mb-2">+880-1608-908002</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="pixel-divider"></div>
+
+				<div class="text-center py-4">
+					<p>© 2025 Asymptote Labs. All rights reserved.</p>
+					<p class="mt-2 text-xs">
+						Made with <span class="text-red-500">♥</span> in Dhaka, Bangladesh
+					</p>
+					<p class="mt-1 text-xs blink">* EKDIN PRITHIBI DHONGSHO HOBE *</p>
+				</div>
+			</div>
+		</footer>
+
+		<!-- JavaScript -->
+		<script>
+			// Function to handle section switching
+			function switchSection(sectionId) {
+				// Hide all sections
+				const sections = document.querySelectorAll(".section");
+				sections.forEach((section) => {
+					section.classList.remove("active");
+				});
+
+				// Show selected section
+				const selectedSection = document.getElementById(sectionId);
+				if (selectedSection) {
+					selectedSection.classList.add("active");
+				}
+
+				// Update menu items
+				const menuItems = document.querySelectorAll(".menu-item");
+				menuItems.forEach((item) => {
+					item.classList.remove("active");
+					if (item.getAttribute("data-section") === sectionId) {
+						item.classList.add("active");
+					}
+				});
+
+				// Scroll to top
+				window.scrollTo(0, 0);
+			}
+
+			// Initialize menu items click events
+			document.addEventListener("DOMContentLoaded", function () {
+				const menuItems = document.querySelectorAll(".menu-item");
+				menuItems.forEach((item) => {
+					item.addEventListener("click", function () {
+						const sectionId = this.getAttribute("data-section");
+						switchSection(sectionId);
+					});
+				});
+
+				// Handle contact form submission
+				const contactForm = document.getElementById("contactForm");
+				if (contactForm) {
+					contactForm.addEventListener("submit", function (e) {
+						e.preventDefault();
+
+						// Get form values
+						const name = document.getElementById("name").value;
+						const email = document.getElementById("email").value;
+						const subject = document.getElementById("subject").value;
+						const message = document.getElementById("message").value;
+
+						// In a real application, you would send this data to a server
+						// For now, let's just show a confirmation message
+						alert(
+							`Thank you, ${name}! Your message has been received.\n\nWe will get back to you at ${email} as soon as possible.`
+						);
+
+						// Reset the form
+						contactForm.reset();
+					});
+				}
+
+				// Add boot-up sequence animation (retro effect)
+				const body = document.body;
+				body.style.opacity = "0";
+
+				// Simulate loading sequence
+				setTimeout(() => {
+					body.style.transition = "opacity 1s";
+					body.style.opacity = "1";
+
+					// Display boot messages in console (easter egg)
+					console.log("ASYMPTOTE LABS OS v1.0");
+					console.log("Initializing systems...");
+					console.log("Loading asymptotic algorithms...");
+					console.log("Calibrating innovation parameters...");
+					console.log("System ready!");
+				}, 500);
+
+				// Add sound effect for buttons (optional)
+				const buttons = document.querySelectorAll(".retro-btn");
+				buttons.forEach((button) => {
+					button.addEventListener("click", function () {
+						// Create a simple beep sound
+						const context = new (window.AudioContext ||
+							window.webkitAudioContext)();
+						const oscillator = context.createOscillator();
+						const gainNode = context.createGain();
+
+						oscillator.type = "square";
+						oscillator.frequency.value = 800;
+						gainNode.gain.value = 0.1;
+
+						oscillator.connect(gainNode);
+						gainNode.connect(context.destination);
+
+						oscillator.start();
+						setTimeout(() => oscillator.stop(), 100);
+					});
+				});
+
+				// Easter egg: Konami code
+				let konamiCode = [
+					"ArrowUp",
+					"ArrowUp",
+					"ArrowDown",
+					"ArrowDown",
+					"ArrowLeft",
+					"ArrowRight",
+					"ArrowLeft",
+					"ArrowRight",
+					"b",
+					"a",
+				];
+				let konamiPosition = 0;
+
+				document.addEventListener("keydown", function (e) {
+					// Check if the key matches the next key in the Konami code
+					if (e.key === konamiCode[konamiPosition]) {
+						konamiPosition++;
+
+						// If the entire Konami code was entered
+						if (konamiPosition === konamiCode.length) {
+							// Reset position
+							konamiPosition = 0;
+
+							// Trigger Easter egg
+							document.body.style.backgroundColor = "#008080"; // Classic teal
+							setTimeout(() => {
+								document.body.style.backgroundColor = "#000080"; // Back to blue
+								alert(
+									"DEVELOPER MODE ACTIVATED! Just kidding, but nice job finding the Konami code Easter egg!"
+								);
+							}, 2000);
+						}
+					} else {
+						// Reset position if wrong key
+						konamiPosition = 0;
+					}
+				});
+
+				// Add a "typing" effect to the blinking cursor elements
+				const typingElements = document.querySelectorAll(".blink");
+				typingElements.forEach((el) => {
+					if (!el.classList.contains("text-xs")) {
+						// Skip the footer message
+						const originalText = el.textContent;
+						el.textContent = "";
+
+						let i = 0;
+						function typeWriter() {
+							if (i < originalText.length) {
+								el.textContent += originalText.charAt(i);
+								i++;
+								setTimeout(typeWriter, 100);
+							}
+						}
+
+						// Start typing effect after a small delay
+						setTimeout(typeWriter, 1000);
+					}
+				});
+
+				// Add hit counter (classic retro touch)
+				const hitCounterContainer = document.createElement("div");
+				hitCounterContainer.className = "text-center mt-4";
+				hitCounterContainer.innerHTML = `
+        
+      `;
+				document
+					.querySelector("footer .text-center")
+					.appendChild(hitCounterContainer);
+
+				// Create a fake "Under Construction" gif (common in old websites)
+				const constructionDiv = document.createElement("div");
+				constructionDiv.className = "text-center mt-4";
+				constructionDiv.innerHTML = `
+        <div class="inline-block border border-yellow-400 bg-black p-2">
+          <div class="text-yellow-400 font-bold" style="margin-top:10px">UNDER CONSTRUCTION</div>
+          <div class="flex justify-center my-1">
+            <div class="w-4 h-4 bg-yellow-400 animate-pulse mx-1"></div>
+            <div class="w-4 h-4 bg-yellow-400 animate-pulse mx-1" style="animation-delay: 0.2s"></div>
+            <div class="w-4 h-4 bg-yellow-400 animate-pulse mx-1" style="animation-delay: 0.4s"></div>
+          </div>
+        </div>
+      `;
+				document.querySelector(".container").appendChild(constructionDiv);
+
+				// Add "This site is best viewed at 800x600" notification
+				const viewNotice = document.createElement("div");
+				viewNotice.className = "text-center mt-2 text-xs";
+				viewNotice.textContent = "";
+				document.querySelector("footer .text-center").appendChild(viewNotice);
+			});
+
+			// Create a fake loading progress effect
+			function simulateLoading() {
+				// Create overlay
+				const overlay = document.createElement("div");
+				overlay.style.position = "fixed";
+				overlay.style.top = "0";
+				overlay.style.left = "0";
+				overlay.style.width = "100%";
+				overlay.style.height = "100%";
+				overlay.style.backgroundColor = "#000";
+				overlay.style.color = "#0F0";
+				overlay.style.fontFamily = "monospace";
+				overlay.style.fontSize = "16px";
+				overlay.style.padding = "20px";
+				overlay.style.boxSizing = "border-box";
+				overlay.style.zIndex = "1000";
+				overlay.style.overflow = "hidden";
+
+				document.body.appendChild(overlay);
+
+				const messages = [
+					"Booting system...",
+					"Initializing Asymptote OS v1.0...",
+					"Loading essential files...",
+					"Checking system integrity...",
+					"Establishing network connection...",
+					"Loading retro interface components...",
+					"Calibrating time circuits...",
+					"Verifying temporal flux...",
+					"Loading color palettes...",
+					"Initializing animation routines...",
+					"Testing sound hardware...",
+					"Preparing user interface...",
+					"System ready. Launching Asymptote Labs...",
+				];
+
+				let index = 0;
+				let progress = 0;
+
+				function addMessage() {
+					if (index < messages.length) {
+						const line = document.createElement("div");
+						line.textContent = messages[index];
+						overlay.appendChild(line);
+
+						index++;
+						progress = (index / messages.length) * 100;
+
+						// Progress bar
+						if (index === 1) {
+							const progressContainer = document.createElement("div");
+							progressContainer.style.width = "100%";
+							progressContainer.style.height = "20px";
+							progressContainer.style.border = "1px solid #0F0";
+							progressContainer.style.marginTop = "20px";
+							progressContainer.style.position = "relative";
+
+							const progressBar = document.createElement("div");
+							progressBar.style.width = "0%";
+							progressBar.style.height = "100%";
+							progressBar.style.backgroundColor = "#0F0";
+							progressBar.style.transition = "width 0.5s";
+							progressBar.id = "loadingProgressBar";
+
+							const progressText = document.createElement("div");
+							progressText.style.position = "absolute";
+							progressText.style.top = "0";
+							progressText.style.left = "0";
+							progressText.style.width = "100%";
+							progressText.style.textAlign = "center";
+							progressText.style.color = "#000";
+							progressText.style.fontWeight = "bold";
+							progressText.id = "loadingProgressText";
+
+							progressContainer.appendChild(progressBar);
+							progressContainer.appendChild(progressText);
+							overlay.appendChild(progressContainer);
+						}
+
+						// Update progress bar
+						const progressBar = document.getElementById("loadingProgressBar");
+						const progressText = document.getElementById("loadingProgressText");
+
+						if (progressBar && progressText) {
+							progressBar.style.width = progress + "%";
+							progressText.textContent = Math.round(progress) + "%";
+						}
+
+						setTimeout(addMessage, 500);
+					} else {
+						// Finish loading animation
+						setTimeout(() => {
+							overlay.style.transition = "opacity 1s";
+							overlay.style.opacity = "0";
+							setTimeout(() => {
+								document.body.removeChild(overlay);
+							}, 1000);
+						}, 500);
+					}
+				}
+
+				// Start the loading sequence
+				addMessage();
+			}
+
+			// Run the loading animation when the page loads
+			window.addEventListener("load", simulateLoading);
+
+			const pbutton = document.querySelector(".project-demo");
+      const pbutton1 = document.querySelector(".project-demo1");
+			const pwarning = document.getElementById("project-warning");
+      const pwarning1 = document.getElementById("project-warning1");
+			pwarning.style.display = "none";
+      pwarning1.style.display = "none";
+			pbutton.addEventListener("click", function () {
+				if (pwarning.style.display === "block") {
+					pwarning.style.display = "none";
+				} else {
+					pwarning.style.display = "block";
+				}
+			});
+      pbutton1.addEventListener("click", function () {
+				if (pwarning1.style.display === "block") {
+					pwarning1.style.display = "none";
+				} else {
+					pwarning1.style.display = "block";
+				}
+			});
+		</script>
+	</body>
+</html>
